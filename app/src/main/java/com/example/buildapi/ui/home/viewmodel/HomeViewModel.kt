@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import java.io.IOException
 
+
 sealed class KontakUIState{
 
     data class Success(val kontak: List<Kontak>) : KontakUIState()
@@ -28,6 +29,18 @@ class HomeViewModel (private val kontakRepository: KontakRepository) : ViewModel
     init {
         getKontak()
     }
+    fun deleteKontak(id: Int){
+        viewModelScope.launch{
+            try {
+                kontakRepository.deleteKontak(id)
+            }catch (e: IOException){
+                KontakUIState.Error
+            }catch (e: HttpException){
+                KontakUIState.Error
+            }
+        }
+    }
+
 
     fun getKontak(){
         viewModelScope.launch {
@@ -41,4 +54,6 @@ class HomeViewModel (private val kontakRepository: KontakRepository) : ViewModel
             }
         }
     }
+
 }
+
