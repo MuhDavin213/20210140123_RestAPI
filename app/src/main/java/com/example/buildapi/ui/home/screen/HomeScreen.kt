@@ -34,13 +34,18 @@ import com.example.buildapi.model.Kontak
 import com.example.buildapi.ui.home.viewmodel.KontakUIState
 
 @Composable
-fun HomeScreen(
-    kontakUIState: KontakUIState,retryAction: () -> Unit,modifier: Modifier =Modifier
+fun HomeStatus(
+    kontakUIState: KontakUIState,
+    retryAction: () -> Unit,
+    modifier: Modifier =Modifier,
+    onDeleteClick: (Kontak) -> Unit = {},
+    onDetailClick: (Int) -> Unit
 ){
     when(kontakUIState){
         is KontakUIState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
         is KontakUIState.Success -> KontakLayout(
-            kontak = kontakUIState.kontak, modifier = modifier.fillMaxWidth()
+            kontak = kontakUIState.kontak, modifier = modifier.fillMaxWidth(),
+            onDetailClick= {}
         )
         is KontakUIState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
     }
@@ -119,7 +124,12 @@ fun KontakCard(
 }
 
 @Composable
-fun KontakLayout(kontak: List<Kontak>, modifier: Modifier = Modifier){
+fun KontakLayout(
+    kontak: List<Kontak>,
+    modifier: Modifier = Modifier,
+    onDetailClick: (Kontak) -> Unit,
+    onDeleteClick: (Kontak) -> Unit = {}
+){
     LazyColumn(
         modifier=Modifier,
         contentPadding = PaddingValues(16.dp),
@@ -128,7 +138,10 @@ fun KontakLayout(kontak: List<Kontak>, modifier: Modifier = Modifier){
         items(kontak){ kontak ->
             KontakCard(kontak = kontak, modifier = Modifier
                 .fillMaxWidth()
-                .clickable { }
+                .clickable {onDetailClick(kontak)},
+                onDeleteClick = {
+                    onDeleteClick(kontak)
+                }
             )
         }
         }
