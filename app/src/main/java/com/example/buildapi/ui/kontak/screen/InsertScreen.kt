@@ -13,9 +13,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.buildapi.navigation.DestinasiNavigasi
+import com.example.buildapi.ui.PenyediaViewModel
 import com.example.buildapi.ui.kontak.viewmodel.InsertUiEvent
 import com.example.buildapi.ui.kontak.viewmodel.InsertUiState
+import com.example.buildapi.ui.kontak.viewmodel.InsertViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -95,4 +98,15 @@ fun EntryKontakBody(
 object DestinasiEntry : DestinasiNavigasi {
     override val route = "item_entry"
     override val titleRes = "Entry  Siswa"
+}
+
+
+@Composable
+fun EntryKontakScreen(
+    navigateBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.Factory),
+){
+
+
 }
