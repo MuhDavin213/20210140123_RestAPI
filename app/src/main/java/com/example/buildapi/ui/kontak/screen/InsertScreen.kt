@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.buildapi.ui.kontak.viewmodel.InsertUiEvent
+import com.example.buildapi.ui.kontak.viewmodel.InsertUiState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,6 +60,15 @@ fun FormInputSiswa(
             thickness = 8.dp,
             modifier = Modifier.padding(12.dp)
         )
-
+    }
 }
+
+@Composable
+fun EntryKontakBody(
+    insertUiState: InsertUiState,
+    onSiswaValueChange: (InsertUiEvent) -> Unit,
+    onSaveClick: () -> Unit,
+    modifier: Modifier = Modifier
+){
+
 }
