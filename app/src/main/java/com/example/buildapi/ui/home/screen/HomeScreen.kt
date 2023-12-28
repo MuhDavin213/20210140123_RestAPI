@@ -118,7 +118,7 @@ fun KontakCard(
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = kontak.alamat,
+                    text = kontak.email,
                     style = MaterialTheme.typography.titleMedium
                 )
 
